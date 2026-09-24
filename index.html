@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>National Cyber Hygiene Initiative</title>
+<style>
+  :root{
+    --navy:#0B2340;
+    --navy-deep:#071730;
+    --gold:#C08A28;
+    --gold-deep:#8F6416;
+    --paper:#F6F4EE;
+    --paper-dim:#EAE6D9;
+    --ink-soft:#3C5169;
+    --line:rgba(11,35,64,0.15);
+    --green:#3F6B4E;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--navy);
+    font-family:"Segoe UI",Verdana,"Trebuchet MS",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;}
+
+  /* TOP BAR */
+  .topbar{background:var(--navy-deep);color:var(--paper-dim);font-size:0.8rem;padding:6px 0;}
+  .topbar .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+
+  /* HEADER / NAV */
+  header{background:var(--navy);color:var(--paper);border-bottom:4px solid var(--gold);}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .badge{width:42px;height:42px;flex:none;}
+  .brand-text b{display:block;font-size:1.05rem;letter-spacing:0.3px;}
+  .brand-text span{display:block;font-size:0.75rem;color:var(--gold);letter-spacing:0.5px;}
+  nav.links{display:flex;gap:24px;font-size:0.9rem;}
+  nav.links a{text-decoration:none;opacity:0.9;}
+  nav.links a:hover{opacity:1;text-decoration:underline;}
+
+  /* HERO */
+  .hero{background:var(--navy);color:var(--paper);padding:64px 0 80px;position:relative;}
+  .hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:center;}
+  .eyebrow-line{width:48px;height:3px;background:var(--gold);margin-bottom:18px;}
+  h1{font-size:clamp(2.2rem,4.6vw,3.3rem);line-height:1.1;margin:0 0 20px;}
+  .lede{font-size:1.05rem;line-height:1.65;color:#C7D2DE;max-width:50ch;margin:0 0 30px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .btn-gold{
+    display:inline-block;background:var(--gold);color:var(--navy-deep);
+    padding:14px 30px;text-decoration:none;font-weight:700;font-size:1rem;
+    border:2px solid var(--gold);transition:background .18s ease,color .18s ease;
+  }
+  .btn-gold:hover{background:transparent;color:var(--gold);}
+  .btn-gold:focus-visible{outline:3px solid #fff;outline-offset:3px;}
+  .btn-outline{
+    display:inline-block;border:2px solid rgba(255,255,255,0.4);color:var(--paper);
+    padding:12px 26px;text-decoration:none;font-weight:600;font-size:0.95rem;
+  }
+  .btn-outline:hover{border-color:#fff;}
+  .fine{font-size:0.82rem;color:#9FB0C2;}
+  .hero-panel{
+    background:var(--navy-deep);border:1px solid rgba(255,255,255,0.12);
+    padding:26px;
+  }
+  .hero-panel h3{margin:0 0 4px;font-size:1rem;color:var(--gold);font-family:inherit;}
+  .hero-panel p{margin:0 0 18px;font-size:0.85rem;color:#9FB0C2;}
+  .stat-row{display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.12);padding-top:14px;margin-top:14px;}
+  .stat-row:first-of-type{border-top:none;padding-top:0;margin-top:0;}
+  .stat b{display:block;font-size:1.4rem;color:#fff;}
+  .stat span{font-size:0.75rem;color:#9FB0C2;}
+
+  /* STATS STRIP */
+  .stats{background:var(--paper-dim);border-bottom:1px solid var(--line);padding:34px 0;}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+  .stats b{display:block;font-size:1.7rem;color:var(--navy);}
+  .stats span{font-size:0.82rem;color:var(--ink-soft);}
+
+  /* SECTION HEADS */
+  .section{padding:70px 0;}
+  .section-head{max-width:60ch;margin:0 0 44px;}
+  .kicker{color:var(--gold-deep);font-weight:700;font-size:0.85rem;margin:0 0 8px;}
+  .section-head h2{font-size:1.9rem;margin:0 0 12px;color:var(--navy);}
+  .section-head p{color:var(--ink-soft);line-height:1.6;margin:0;}
+
+  /* ABOUT / MANDATE */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  .about-grid p{color:var(--ink-soft);line-height:1.7;margin:0 0 16px;}
+  .pillars{list-style:none;margin:0;padding:0;}
+  .pillars li{border-top:1px solid var(--line);padding:14px 0;display:flex;gap:14px;align-items:flex-start;}
+  .pillars li:last-child{border-bottom:1px solid var(--line);}
+  .pillars .num{font-weight:700;color:var(--gold-deep);min-width:28px;}
+
+  /* SEQUENCE */
+  .sequence{background:var(--navy);color:var(--paper);}
+  .sequence .section-head h2, .sequence .kicker{color:var(--paper);}
+  .sequence .kicker{color:var(--gold);}
+  .sequence .section-head p{color:#B9C6D4;}
+  .path{border-left:2px solid var(--gold);margin-left:14px;padding-left:34px;}
+  .step{position:relative;padding-bottom:38px;}
+  .step:last-child{padding-bottom:0;}
+  .step::before{
+    content:"";position:absolute;left:-42px;top:2px;width:16px;height:16px;
+    background:var(--navy);border:3px solid var(--gold);border-radius:50%;
+  }
+  .step h3{margin:0 0 6px;font-size:1.1rem;color:#fff;font-family:inherit;}
+  .step p{margin:0;color:#B9C6D4;line-height:1.55;max-width:56ch;}
+
+  /* ELIGIBILITY */
+  .card{
+    background:#fff;border:1px solid var(--line);padding:36px;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:26px;
+  }
+  .field{border-top:1px solid var(--line);padding-top:14px;}
+  .field .k{font-size:0.78rem;color:var(--gold-deep);margin-bottom:4px;font-weight:700;}
+  .field .v{font-size:1.02rem;font-weight:600;color:var(--navy);}
+
+  /* FAQ */
+  .faq-item{border-top:1px solid var(--line);}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-item summary{
+    padding:18px 0;cursor:pointer;font-weight:600;font-size:1rem;
+    list-style:none;display:flex;justify-content:space-between;align-items:center;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+";font-size:1.3rem;color:var(--gold-deep);}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item p{margin:0 0 20px;color:var(--ink-soft);line-height:1.6;max-width:65ch;}
+
+  /* REGISTER */
+  .register{background:var(--paper-dim);text-align:center;padding:80px 0;}
+  .register h2{font-size:2rem;margin:0 0 12px;color:var(--navy);}
+  .register p{color:var(--ink-soft);max-width:52ch;margin:0 auto 30px;line-height:1.6;}
+
+  /* FOOTER */
+  footer{background:var(--navy-deep);color:#9FB0C2;padding:48px 0 24px;font-size:0.88rem;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;margin-bottom:32px;}
+  .foot-grid h4{color:#fff;font-size:0.9rem;margin:0 0 12px;font-family:inherit;}
+  .foot-grid ul{list-style:none;padding:0;margin:0;}
+  .foot-grid li{margin-bottom:8px;}
+  .foot-grid a{text-decoration:none;}
+  .foot-grid a:hover{text-decoration:underline;}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  @media (max-width:820px){
+    .hero-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .card{grid-template-columns:1fr;padding:26px;}
+    .stats .wrap{grid-template-columns:repeat(2,1fr);row-gap:22px;}
+    .foot-grid{grid-template-columns:1fr;}
+    nav.links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Ministry-recognised digital literacy programme</span>
+    <span>Helpline: 1800-XXX-XXXX (toll-free)</span>
+  </div>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <svg class="badge" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="none" stroke="#C08A28" stroke-width="2.5"/>
+        <path d="M32 12 L48 20 V32 C48 44 40 52 32 56 C24 52 16 44 16 32 V20 Z" fill="none" stroke="#F6F4EE" stroke-width="2.5"/>
+        <circle cx="32" cy="30" r="4.5" fill="#C08A28"/>
+        <rect x="29" y="33" width="6" height="10" fill="#C08A28"/>
+      </svg>
+      <div class="brand-text">
+        <b>National Cyber Hygiene Initiative</b>
+        <span>Digital Safety &amp; Awareness Programme</span>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#programme">Programme</a>
+      <a href="#eligibility">Eligibility</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-line"></div>
+      <h1>Building a cyber-safe generation, one workshop at a time.</h1>
+      <p class="lede">A free, nationwide cyber safety awareness programme delivered directly to schools, colleges and communities — combining a hygiene pledge, an assessment quiz, certification, and take-home learning material.</p>
+      <div class="cta-row">
+        <a class="btn-gold" href="https://docs.google.com/forms/d/e/1FAIpQLSfEAEXZrOg-s-XlEIHc6hiJtsdMYxEKB3Qdr1RHddfgsHStGg/viewform?usp=preview" target="_blank" rel="noopener">Register your institution</a>
+        <a class="btn-outline" href="#programme">See how it works</a>
+      </div>
+      <p class="fine" style="margin-top:18px;">No cost to participating institutions. Registration takes under 2 minutes.</p>
+    </div>
+    <div class="hero-panel">
+      <h3>Programme at a glance</h3>
+      <p>Delivered on-site, by request</p>
+      <div class="stat-row">
+        <div class="stat"><b>Free</b><span>Cost to participants</span></div>
+        <div class="stat"><b>~90 min</b><span>Typical session length</span></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>4</b><span>Steps to completion</span></div>
+        <div class="stat"><b>1</b><span>Certificate issued to each attendee</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div><b>Pledge</b><span>Cyber hygiene commitment</span></div>
+    <div><b>Quiz</b><span>Topic knowledge check</span></div>
+    <div><b>Certificate</b><span>Proof of participation</span></div>
+    <div><b>Free books</b><span>Take-home material</span></div>
+  </div>
+</div>
+
+<section class="section" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="kicker">About the initiative</div>
+      <h2>Why cyber hygiene, and why now</h2>
+      <p>As more of daily life — school, banking, socialising — moves online, basic digital safety habits matter as much as literacy itself. This programme brings a structured, in-person session to institutions that request it, at no cost.</p>
+      <p>Sessions are led in plain language, cover practical habits rather than abstract theory, and end with something participants can act on immediately.</p>
+    </div>
+    <ul class="pillars">
+      <li><span class="num">01</span><span>Delivered on request, at your institution's premises</span></li>
+      <li><span class="num">02</span><span>Open to schools, colleges and community groups nationwide</span></li>
+      <li><span class="num">03</span><span>No registration fee or hidden cost</span></li>
+      <li><span class="num">04</span><span>Every attendee leaves with a certificate and a book</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section sequence" id="programme">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">How the session runs</div>
+      <h2>Four stops, in order</h2>
+      <p>Each stage builds on the one before it, and every attendee completes all four in a single sitting.</p>
+    </div>
+    <div class="path">
+      <div class="step">
+        <h3>1. Take the pledge</h3>
+        <p>Attendees commit to core cyber hygiene habits — strong, unique passwords, careful sharing, and recognising scams before they cause harm.</p>
+      </div>
+      <div class="step">
+        <h3>2. Sit the quiz</h3>
+        <p>A short assessment on the session's topic, checking what's understood and flagging what to revisit.</p>
+      </div>
+      <div class="step">
+        <h3>3. Receive the certificate</h3>
+        <p>Every participant is issued a certificate confirming completion of the workshop.</p>
+      </div>
+      <div class="step">
+        <h3>4. Take a free book home</h3>
+        <p>A book on digital safety, to keep the learning going after the session ends.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="eligibility">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Before you apply</div>
+      <h2>What you'll need to register</h2>
+      <p>The registration form asks for four details. Have these ready before you begin.</p>
+    </div>
+    <div class="card">
+      <div class="field"><div class="k">Required</div><div class="v">School / college / community name</div></div>
+      <div class="field"><div class="k">Required</div><div class="v">A contact number</div></div>
+      <div class="field"><div class="k">Required</div><div class="v">Preferred date</div></div>
+      <div class="field"><div class="k">Required</div><div class="v">Preferred time and full address</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Common questions</div>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Is there any cost to register?</summary>
+        <p>No. The workshop, certificate, and books are provided free of charge to every participating institution.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Who can request a session?</summary>
+        <p>Any school, college, or community group can register. Sessions are delivered on-site at the address provided.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How soon after registering will the session happen?</summary>
+        <p>Sessions are scheduled around the date and time you provide during registration; the team will confirm availability after you submit the form.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is prior knowledge of cybersecurity required?</summary>
+        <p>No. The session is designed for beginners and covers practical habits in plain language.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="register">
+  <div class="wrap">
+    <h2>Bring the workshop to your institution</h2>
+    <p>Registration takes about two minutes. You'll need your institution's name, a contact number, and a preferred date, time, and address.</p>
+    <a class="btn-gold" href="https://docs.google.com/forms/d/e/1FAIpQLSfEAEXZrOg-s-XlEIHc6hiJtsdMYxEKB3Qdr1RHddfgsHStGg/viewform?usp=preview" target="_blank" rel="noopener">Go to registration form</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>National Cyber Hygiene Initiative</h4>
+        <p style="margin:0;line-height:1.6;">A free, nationwide digital safety awareness programme for schools, colleges, and communities.</p>
+      </div>
+      <div>
+        <h4>Programme</h4>
+        <ul>
+          <li><a href="#about">About the initiative</a></li>
+          <li><a href="#programme">How it works</a></li>
+          <li><a href="#eligibility">Eligibility</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Register</h4>
+        <ul>
+          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfEAEXZrOg-s-XlEIHc6hiJtsdMYxEKB3Qdr1RHddfgsHStGg/viewform?usp=preview" target="_blank" rel="noopener">Registration form</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Registrations are processed securely via Google Forms. Never share passwords in the form.</span>
+      <span>© 2026 National Cyber Hygiene Initiative</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
